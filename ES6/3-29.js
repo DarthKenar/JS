@@ -4,7 +4,6 @@ function freezeObj() {
     };
     // Cambia solo el código debajo de esta línea
     Object.freeze(MATH_CONSTANTS);
-  
     // Cambia solo el código encima de esta línea
     try {
       MATH_CONSTANTS.PI = 99;
