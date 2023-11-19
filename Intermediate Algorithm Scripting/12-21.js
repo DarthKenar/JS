@@ -18,6 +18,7 @@ function sumFibs(num) {
     });
     //return sum
     return sum
-  };
-  
-  sumFibs(75025);
+};
+
+sumFibs(75025);
+//O(log(num)) complexity
