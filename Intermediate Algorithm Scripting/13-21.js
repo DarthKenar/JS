@@ -12,6 +12,7 @@ function sumPrimes(num) {
       };
     };
     console.log(primes)
+    
 
 }
 
