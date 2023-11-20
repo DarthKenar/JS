@@ -1,19 +1,10 @@
 function sumPrimes(num) {
-    //generar todos los numeros desde 0 a num
-    let primes = []
-    for(let i=0;i<=num;i++){
-      primes.push(i)
-    };
-    //comprobar si son primos a partír del 2
-    for(let i=2;i>num; i++){
-      if(primes.includes(i)){
-        primes.filter((e)=>e%i==0)
-        console.log(primes)
-      };
-    };
-    console.log(primes)
-    
-
+  // Check all numbers for primality
+  let primes = [];
+  for (let i = 2; i <= num; i++) {
+    if (primes.every((prime) => i % prime !== 0))
+      primes.push(i);
+  }
+  return primes.reduce((sum, prime) => sum + prime, 0);
 }
-
-console.log(sumPrimes(10)); // Debería devolver 73156
+console.log(sumPrimes(10))
