@@ -1,5 +1,9 @@
 function palindrome(str) {
-  return true;
-}
-
-palindrome("eye");
+    str = str.toUpperCase()
+    console.log(str)
+    console.log(Math.round(5.5))
+    for(let i=0; i<Math.round(str.length.round); i++)
+    return true;
+  }
+  
+  palindrome("eye");
