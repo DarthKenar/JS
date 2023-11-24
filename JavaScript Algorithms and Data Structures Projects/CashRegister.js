@@ -37,8 +37,15 @@ console.log(values[valueslength][1])
         //si esta en la comprobación del ultimo elemento y el valor change no es 0
           //  devolver {status: "INSUFFICIENT_FUNDS", change: []}
       };
+    };
+    if(cid.filter((e)=>e[1]!=0) == []){
+      console.log(cid.filter((e)=>e[1]!=0))
+      console.log("si")
+      return {status: "CLOSE", change: change}
+    }else{
+      return {status: "OPEN", change: change}
     }
-    return {status: "CLOSED", change: change}
+    
     //mientras el cambio sea diferente de 0 hacer:
         //encontrar el cambio que sea igual o menor al vuelto recorriendo todos los valores posibles de la caja registradora
             //si hay vuelto de ese valor (tipo de moneda) en la caja
@@ -51,4 +58,4 @@ console.log(values[valueslength][1])
   }
 
   
-  checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
