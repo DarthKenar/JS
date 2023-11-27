@@ -1,6 +1,6 @@
 function checkCashRegister(price, cash, cid) {
-    let totalChange = cash - price;
-    let values = [
+  let remainingChange = cash - price;
+  const currencyUnit = [
   ["PENNY", 0.01],
   ["NICKEL", 0.05],
   ["DIME", 0.1],
@@ -10,8 +10,8 @@ function checkCashRegister(price, cash, cid) {
   ["TEN", 10],
   ["TWENTY", 20],
   ["ONE HUNDRED", 100]
-]
-    let change = [
+];
+  const change = [
   ["PENNY", 0.00],
   ["NICKEL", 0.00],
   ["DIME", 0.0],
@@ -21,41 +21,32 @@ function checkCashRegister(price, cash, cid) {
   ["TEN", 0],
   ["TWENTY", 0],
   ["ONE HUNDRED", 0]
-]
-let valueslength = values.length-1
-console.log(values[valueslength][1])
-    while(totalChange != 0){
-      for(let i=0; i<valueslength;i++){
-        if(values[valueslength-i][1]<=totalChange){
-          if(cid[valueslength-i][1]>0){
-            cid[valueslength-i][1] -= values[valueslength-i][1]
-            totalChange -= values[valueslength-i][1]
-            change[valueslength-i][1] += values[valueslength-i][1]
-            break;
-          };
+];
+  function recursive(remainingChange, cid, cu, change){
+    for(let i=cid.length-1; i>0; i--){
+      if(currencyUnit[i][1]<=remainingChange){
+        if(cid[i][1]>0){
+          remainingChange -= currencyUnit[i][1]
+          cid[i][1] -= currencyUnit[i][1]
+          change[i][1] += currencyUnit[i][1]
+          return recursive(remainingChange, cid, cu, change)
         };
-        //si esta en la comprobación del ultimo elemento y el valor change no es 0
-          //  devolver {status: "INSUFFICIENT_FUNDS", change: []}
       };
     };
-    if(cid.filter((e)=>e[1]!=0) == []){
-      console.log(cid.filter((e)=>e[1]!=0))
-      console.log("si")
-      return {status: "CLOSE", change: change}
-    }else{
-      return {status: "OPEN", change: change}
-    }
-    
-    //mientras el cambio sea diferente de 0 hacer:
-        //encontrar el cambio que sea igual o menor al vuelto recorriendo todos los valores posibles de la caja registradora
-            //si hay vuelto de ese valor (tipo de moneda) en la caja
-                //restarlo de la caja
-                //restarlo del vuelto
-                //agregarlo a la lista de billetes o modenas utilizadas
-    //devolver CLOSE (porque salio del while y el cambio es 0)
-        
-    return change;
-  }
+    return [remainingChange, change]
+  };
 
-  
-checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
+  let response = recursive(remainingChange, cid, currencyUnit, change)
+
+  let reduceCID = cid.reduce((accumulator, currentValue)=>accumulator + currentValue[1])
+  if(reduceCID > response[0]){
+    return {status:"INSUFFICIENT_FUNDS",change:[]}
+  }else if(reduceCID == 0 && remainingChange == 0){
+    return {status: "CLOSED", change: response[1]}
+  }else{
+    return {status: "OPEN", change: response[1].reverse().filter((e) => e[1]>0)}
+  };
+}
+
+var test = checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+console.log(test)
