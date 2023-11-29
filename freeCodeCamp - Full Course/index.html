@@ -6,16 +6,20 @@
         <title>juego</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <section>
+    <body class="body">
+        <section class="center">
             <h1>Counter:</h1>
             <h2 id="counter">0</h2>
-            <button onclick="increment()">Incrementar</button>
-            <button onclick="save()">Guardar</button>
+            <div>
+                <div type="button" class="button" onclick="increment()">Incrementar</div>
+                <div type="button" class="button" onclick="save()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                </div>
+            </div>
             <h2 id="log"></h2>
         </section>
-        <script src="script.js" async defer></script>
     </body>
+    <script src="script.js" async defer></script>
 </html>
