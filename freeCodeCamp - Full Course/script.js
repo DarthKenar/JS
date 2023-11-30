@@ -10,3 +10,11 @@ function save(){
     value = 0
     counter.textContent = value
 };
+
+//Styles
+function incrementStyle(){
+    let btn = document.getElementsByClassName("btn-increment")
+    btn.classList.toggle("button");
+    btn.classList.toggle("button-pressed");
+}
+
